@@ -1,0 +1,11 @@
+https://git.beagleboard.org/beagleconnect/zephyr/zephyr
+
+https://git.beagleboard.org/beagleconnect/freedom/-/tree/master/sw
+
+# Latest (6/2/2023) connect zephyr images
+wget https://files.beagle.cc/file/beagleboard-public-2021/images/zephyr-beagle-cc1352-0.2.2.zip
+
+
+Setting timezone (from http://derekmolloy.ie/automatically-setting-the-beaglebone-black-time-using-ntp/)
+root@beaglebone:/etc# rm localtime
+root@beaglebone:/etc# ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
