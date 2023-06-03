@@ -67,8 +67,7 @@ class DataGetter:
         self.command_q.put(MP_Command(COMMANDTYPE.RESUME_READING,''))      
     def SetStartTime(self):
         self.command_q.put(MP_Command(COMMANDTYPE.SET_STARTTIME,[datetime.datetime.today()]))
-                  
-    #endregion   
+                      
 
     def ClearAnswerQueueInternal(self):
         try:
@@ -145,10 +144,11 @@ class DataGetter:
     def ReadValues(self): 
         currentTime = datetime.datetime.today()                          
         data, sender = self.sock.recvfrom(1024)
-        packet=DataPacket.DataPacket(data,sender)
+        packet=DataPacket.DataPacket(data,sender,currentTime)
+        # print (str(sender) + '  ' + repr(data))   
         print(packet)
         #self.data_q.put(packet)     
-        #print (str(sender) + '  ' + repr(data))   
+        
         
         #for info in self.focalFreedoms:
         #    try:                                       

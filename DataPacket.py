@@ -2,17 +2,22 @@ from Enums import DATAPACKETTYPE
 
 class DataPacket:
   
-    def __init__(self,data,sender):
+    def __init__(self,data,sender,currenttime):
         self.freedomID=0
         self.address = ""
+        self.secondInt=0
         self.thirdInt=0
         self.lastInt=0
         self.temperature=0.0
         self.humidity=0.0
         self.lux=0.0
 
+        self.time = currenttime
+
         self.address = sender[0]
-        self.freedomID=sender[1]
+        tmp = self.address.split(':')
+        self.freedomID = tmp[2]
+        self.secondInt=sender[1]
         self.thirdInt=sender[2]
         self.lastInt=sender[3]
 
@@ -44,11 +49,12 @@ class DataPacket:
             ## Nonsense packet
 
     def __str__(self):
+        s = str(self.currentTime)
         if(self.packetType==DATAPACKETTYPE.TEMPHUMID):
-            s = "\nFreedom: " + str(self.freedomID) +"\n" + "Temp: " + str(self.temperature) +"\n" + "Humid: " + str(self.humidity) +"\n"
+            s += "\nFreedom: " + str(self.freedomID) +"\n" + "Temp: " + str(self.temperature) +"\n" + "Humid: " + str(self.humidity) +"\n"
         elif(self.packetType==DATAPACKETTYPE.LUX):
-            s = "\nFreedom: " + str(self.freedomID) +"\n" + "LUX: " + str(self.lux)
+            s += "\nFreedom: " + str(self.freedomID) +"\n" + "LUX: " + str(self.lux) +"\n"
         else:
-            s="\nUnkown packetType."
+            s+="\nUnkown packetType.\n"
         return s
     
